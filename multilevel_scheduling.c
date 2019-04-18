@@ -42,7 +42,6 @@ void main()
         temp=queue1[i];
         queue1[i]=queue1[pos];
         queue1[pos]=temp;
-        
     }
     time=queue1[0].arrT;
     for(i=0;totalProcess!=0;i++)
@@ -77,6 +76,9 @@ void main()
 				wait_time+=time-queue1[i].arrT-queue1[i].burTcopy; 
     			turnaround_time+=time-queue1[i].arrT;
     			for(k=i;k<totalProcess-1;k++)
+    				queue1[k]=queue1[k+1];i--;
+    			totalProcess--;
+				count=t1;break;
 			}
 		}
 		count=0;
