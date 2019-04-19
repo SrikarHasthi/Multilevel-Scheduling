@@ -9,11 +9,12 @@ void main()
 	struct process temp;
     int i,time=0,t1,t2,bu_t=0,largest,totalProcess,count=0,k,pf2=0,totalProcess2,n,pos,j,flag=0,y;
     float wait_time=0,turnaround_time= 0,average_waiting_time,average_turnaround_time;
-    printf("\nEnter Total Number of Processes:   ");
+    printf("\nEnter Number of Processes :   ");
     scanf("%d",&totalProcess);
     n=totalProcess;
     for(i=0;i<totalProcess;i++)
     {
+    	printf("\nProcess %d",i+1);
     	printf("\nEnter Process Id: ");
     	//fflush(stdin);
         scanf("%d",&queue1[i].pro_Id);
@@ -30,7 +31,7 @@ void main()
     scanf("%d",&t1);
     printf("\nEnter Time Quantum for Round Robin queue: ");
     scanf("%d",&t2);
-    printf("\n\nProcess\t|Turnaround Time|Waiting Time\n\n");
+    printf("\n\nProcessID\t|Turnaround Time|Waiting Time\n\n");
     for(i=0;i<totalProcess;i++)
     {
         pos=i;
@@ -78,15 +79,16 @@ void main()
     			for(k=i;k<totalProcess-1;k++)
     				queue1[k]=queue1[k+1];i--;
     			totalProcess--;
-				count=t1;break;
+				count=t1;
+				break;
 			}
 		}
 		count=0;
 		if(queue1[i].burT!=0)
 		{
+			for(k=i;k<totalProcess-1;k++)
 			queue2[pf2]=queue1[i];
 			pf2++;
-			for(k=i;k<totalProcess-1;k++)
     			queue1[k]=queue1[k+1];
     		totalProcess--;
 		}
@@ -110,15 +112,16 @@ void main()
     	} 
     	if(queue2[count].burT==0&&flag==1) 
     	{ 
-    		totalProcess2--; 
+    		
     		queue2[count].turnT=time-queue2[count].arrT;
 			queue2[count].waiturnT=queue2[count].turnT-queue2[count].burTcopy; 
-			printf("%d\t|\t%d\t|\t%d\n",queue2[count].pro_Id,queue2[count].turnT,queue2[count].waiturnT); 
+			printf("%d\t||\t%d\t||\t%d\n",queue2[count].pro_Id,queue2[count].turnT,queue2[count].waiturnT); 
     		turnaround_time+=time-queue2[count].arrT;
     		wait_time+=time-queue2[count].arrT-queue2[count].burTcopy;
     		for(k=count;k<totalProcess2;k++)
     			queue2[k]=queue2[k+1];count--;
     		flag=0; 
+    			totalProcess2--; 
     	} 
 
     	if(count==totalProcess2-1) 
