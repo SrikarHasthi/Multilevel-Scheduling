@@ -31,7 +31,9 @@ void main()
     scanf("%d",&t1);
     printf("\nEnter Time Quantum for Round Robin queue: ");
     scanf("%d",&t2);
-    printf("\n\nProcessID\t|Turnaround Time|Waiting Time\n\n");
+    printf("\n--------------------------------------\n");
+    printf("Process\t|Turnaround Time|Waiting Time|\n");
+    printf("--------------------------------------\n");
     for(i=0;i<totalProcess;i++)
     {
         pos=i;
@@ -73,22 +75,22 @@ void main()
 			{
 				queue1[i].turnT=time-queue1[i].arrT;
 				queue1[i].waiturnT=queue1[i].turnT-queue1[i].burTcopy;
-				printf("%d\t|\t%d\t|\t%d\n",queue1[i].pro_Id,queue1[i].turnT,queue1[i].waiturnT);
+				printf("%d\t|\t%d\t|\t%d    |\n",queue1[i].pro_Id,queue1[i].turnT,queue1[i].waiturnT);
+				printf("--------------------------------------\n");
 				wait_time+=time-queue1[i].arrT-queue1[i].burTcopy; 
     			turnaround_time+=time-queue1[i].arrT;
     			for(k=i;k<totalProcess-1;k++)
     				queue1[k]=queue1[k+1];i--;
     			totalProcess--;
-				count=t1;
-				break;
+				count=t1;break;
 			}
 		}
 		count=0;
 		if(queue1[i].burT!=0)
 		{
-			for(k=i;k<totalProcess-1;k++)
 			queue2[pf2]=queue1[i];
 			pf2++;
+			for(k=i;k<totalProcess-1;k++)
     			queue1[k]=queue1[k+1];
     		totalProcess--;
 		}
@@ -112,16 +114,14 @@ void main()
     	} 
     	if(queue2[count].burT==0&&flag==1) 
     	{ 
-    		
+    		totalProcess2--; 
     		queue2[count].turnT=time-queue2[count].arrT;
 			queue2[count].waiturnT=queue2[count].turnT-queue2[count].burTcopy; 
-			printf("%d\t||\t%d\t||\t%d\n",queue2[count].pro_Id,queue2[count].turnT,queue2[count].waiturnT); 
-    		turnaround_time+=time-queue2[count].arrT;
+			printf("%d\t|\t%d\t|\t%d\n",queue2[count].pro_Id,queue2[count].turnT,queue2[count].waiturnT); 
     		wait_time+=time-queue2[count].arrT-queue2[count].burTcopy;
     		for(k=count;k<totalProcess2;k++)
     			queue2[k]=queue2[k+1];count--;
     		flag=0; 
-    			totalProcess2--; 
     	} 
 
     	if(count==totalProcess2-1) 
