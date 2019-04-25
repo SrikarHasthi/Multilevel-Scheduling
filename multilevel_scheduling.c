@@ -7,7 +7,7 @@ struct process
 void main()
 {
 	struct process temp;
-    int i,time=0,t1,t2,bu_t=0,largest,totalProcess,count=0,k,pf2=0,totalProcess2,n,pos,j,flag=0,y;
+    int i,time=0,t1,t2,bu_t=0,largest,totalProcess,count=0,k,p=0,totalProcess2,n,pos,j,flag=0,y;
     float wait_time=0,turnaround_time= 0,average_waiting_time,average_turnaround_time;
     printf("\nEnter Number of Processes :   ");
     scanf("%d",&totalProcess);
@@ -58,8 +58,8 @@ void main()
     			{
     				if(queue1[j].arrT==time&&queue1[j].priority<queue1[i].priority)
     				{
-    					queue2[pf2]=queue1[i];
-						pf2++;
+    					queue2[p]=queue1[i];
+						p++;
     					for(k=i;k<totalProcess-1;k++)
     						queue1[k]=queue1[k+1];
     					totalProcess--;
@@ -88,8 +88,8 @@ void main()
 		count=0;
 		if(queue1[i].burT!=0)
 		{
-			queue2[pf2]=queue1[i];
-			pf2++;
+			queue2[p]=queue1[i];
+			p++;
 			for(k=i;k<totalProcess-1;k++)
     			queue1[k]=queue1[k+1];
     		totalProcess--;
@@ -98,7 +98,7 @@ void main()
 				i=-1;
 	}
 	
-	totalProcess2=pf2;
+	totalProcess2=p;
 	for(count=0;totalProcess2!=0;) 
 	{ 
 		if(queue2[count].burT<=t2&&queue2[count].burT>0) 
@@ -118,6 +118,7 @@ void main()
     		queue2[count].turnT=time-queue2[count].arrT;
 			queue2[count].waiturnT=queue2[count].turnT-queue2[count].burTcopy; 
 			printf("%d\t|\t%d\t|\t%d\n",queue2[count].pro_Id,queue2[count].turnT,queue2[count].waiturnT); 
+    		turnaround_time+=time-queue2[count].arrT;
     		wait_time+=time-queue2[count].arrT-queue2[count].burTcopy;
     		for(k=count;k<totalProcess2;k++)
     			queue2[k]=queue2[k+1];count--;
